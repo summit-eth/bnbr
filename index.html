@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+<!--script async src="https://www.googletagmanager.com/gtag/js?id=G-EFTK6S7YX7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EFTK6S7YX7');
+</script-->
+<meta charset="utf-8">
+<link rel="icon" href="favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:title" content="BNBRoyal">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bnbroyal.io/">
+<meta property="og:image" content="https://bnbroyal.io/img/favicon.png">
+<meta property="og:description" content="Stake & Earn BNB up to 8% daily!">
+<style>body:not(.loaded) { visibility: hidden }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Righteous&family=Source+Sans+Pro:wght@300;400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/styles.css">
+<title>BNBRoyal - Stake &amp; Earn BNB up to 8% daily!</title>
+</head>
+<body class="loaded">
+
+<div id="root">
+
+    <div class="header">
+        <div class="wrapped">
+            <img src="img/hero-icon.png">
+            <h1>BNB<span>Royal</span></h1>
+            <button @click="connectWallet">{{user.address==""?"connect wallet":cleanText(user.address)}}</button>
+        </div>
+    </div>
+    
+    <div class="content">
+        <div class="wrapped">
+            <div class="side">
+                <div class="inverted">
+                    <h2>total staked volume</h2>
+                    <div bnb>{{format(dapp.totalInvested)}}</div>
+                    <sub>$ {{format(dapp.totalInvested*config.price.price,2)}}</sub>
+                </div>
+                <div class="inverted">
+                    <h2>total referral rewards</h2>
+                    <div bnb>{{format(dapp.totalBonus)}}</div>
+                    <sub>$ {{format(dapp.totalBonus*config.price.price,2)}}</sub>
+                </div>
+                <div class="links">
+                    <h2>quick links</h2>
+                    <a href="https://bscscan.com/">verified contract</a>
+                    <a href="./docs">docs</a>
+                    <a href="https://t.me/bnbroyalofficial">telegram group</a>
+                </div>
+                <div>
+                    <h2>read before use</h2>
+                    <p>The principal deposit cannot be withdrawn, the only return users can get are daily dividends and referral rewards.</p>
+                </div>
+                <div class="whale">
+                    <h2>anti-whale algorithm</h2>
+                    <p>Users can only <u>claim</u> <b>every 24 hours</b> with a maximum amount of <b>20 BNB</b>.<br>Excess dividends are sent back to the user's account available for the next withdrawal.</p>
+                </div>
+    
+                <div class="footer">
+                        bnbroyal.io &copy; 2021
+                </div>
+            </div>
+            <div class="main">
+                <div class="account">
+                    <h2>your account</h2>
+                    <div>
+                        <div>
+                            <div>bnb to collect</div>
+                            <div bnb>{{format(user.available, 8)}}</div>
+                            <sub>$ {{format(user.available*config.price.price,2)}}</sub>
+                            <button @click="withdraw" :class="{disabled:current_time<user.checkpoint+constants.WITHDRAW_COOLDOWN}">collect</button>
+                            <div style="margin-top: 5px" v-if="user.checkpoint > 0 && current_time < user.checkpoint + constants.WITHDRAW_COOLDOWN">Available in {{countdown(user.checkpoint+constants.WITHDRAW_COOLDOWN, 1)}}</div>
+                        </div>
+                        <div>
+                            <div>total staked</div>
+                            <div bnb>{{format(user.invested, 2)}}</div>
+                            <sub>$ {{format(user.invested*config.price.price,2)}}</sub>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h2>choose a plan</h2>
+                    <div class="planlist">
+                        <div>
+                            <input type="radio" name="planpick" id="plan1" value="0" v-model="val.plan" v-bind:checked="val.plan==0">
+                            <label for="plan1">
+                                <h4>Plan 1</h4>
+                                <div>
+                                    <div>
+                                        <div>Days</div><div>90</div>
+                                    </div>
+                                    <div>
+                                        <div>Daily</div><div>5%</div>
+                                    </div>
+                                    <div>
+                                        <div>APR</div><div>450%</div>
+                                    </div>
+                                </div>
+                            </label>
+                            <input type="radio" name="planpick" id="plan2" value="1" v-model="val.plan" v-bind:checked="val.plan==1">
+                            <label for="plan2">
+                                <h4>Plan 2</h4>
+                                <div>
+                                    <div>
+                                        <div>Days</div><div>45</div>
+                                    </div>
+                                    <div>
+                                        <div>Daily</div><div>6%</div>
+                                    </div>
+                                    <div>
+                                        <div>Total</div><div>270%</div>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" name="planpick" id="plan3" value="2" v-model="val.plan" v-bind:checked="val.plan==2">
+                            <label for="plan3">
+                                <h4>Plan 3</h4>
+                                <div>
+                                    <div>
+                                        <div>Days</div><div>30</div>
+                                    </div>
+                                    <div>
+                                        <div>Daily</div><div>7%</div>
+                                    </div>
+                                    <div>
+                                        <div>APR</div><div>210%</div>
+                                    </div>
+                                </div>
+                            </label>
+                            <input type="radio" name="planpick" id="plan4" value="3" v-model="val.plan" v-bind:checked="val.plan==3">
+                            <label for="plan4">
+                                <h4>Plan 4</h4>
+                                <div>
+                                    <div>
+                                        <div>Days</div><div>20</div>
+                                    </div>
+                                    <div>
+                                        <div>Daily</div><div>8%</div>
+                                    </div>
+                                    <div>
+                                        <div>Total</div><div>160%</div>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form">
+                        <p>Minimum: <span bnb>0.05</span></p>
+                        <input type="number" placeholder="1 BNB" v-model="val.invest">
+                        <button @click="invest">stake</button>
+                    </div>
+                </div>
+                <div>
+                    <h2>referral program</h2>
+                    <div class="reflist">
+                        <div>
+                            <div>level 1</div>
+                            <div>5%</div>
+                        </div>
+                        <div>
+                            <div>level 2</div>
+                            <div>3%</div>
+                        </div>
+                        <div>
+                            <div>level 3</div>
+                            <div>2%</div>
+                        </div>
+                    </div>
+                    <div class="refinfo">
+                        <div>
+                            <div>total rewards</div>
+                            <div bnb>{{format(user.bonus, 4)}}</div>
+                            <sub>$ {{format(user.bonus*config.price.price,2)}}</sub>
+                        </div>
+                    </div>
+                    <div class="reflink">
+                        <p>Your Referral Link:</p>
+                        <div>https://bnbroyal.io?ref={{user.address}}</div>
+                        <button>copy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+<script src="js/abi.contract.js"></script>
+<script src="js/vue.min.js"></script>
+<script src="js/web3.min.js"></script>
+<script src="js/web3m.min.js"></script>
+<script src="js/evm.min.js"></script>
+<script src="js/walletconnect.min.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
