@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="en-us">
 <head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-D04435B5VR"></script>
+<!--script async src="https://www.googletagmanager.com/gtag/js?id=G-D04435B5VR"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
   gtag('config', 'G-D04435B5VR');
-</script>
+</script-->
 <meta charset="utf-8">
 <link rel="icon" href="favicon.ico">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -38,6 +38,12 @@
             <img src="img/hero-icon.png" @click="goHome">
             <h1 @click="goHome">BNB<span>Royal</span></h1>
             <button @click="connectWallet">{{user.address==""?"connect wallet":cleanText(user.address)}}</button>
+        </div>
+    </div>
+    
+    <div class="header" v-if="current_time < launch_date">
+        <div class="wrapped">
+            <h1>Starting in: {{time_left.hours}}h {{time_left.minutes}}m {{time_left.seconds}}s</h1>
         </div>
     </div>
     
