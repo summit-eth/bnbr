@@ -59,12 +59,12 @@
         <div class="wrapped">
             <div class="side">
                 <div class="inverted">
-                    <h2>total staked volume</h2>
+                    <sub>TOTAL STAKED VOLUME</sub>
                     <div bnb>{{format(dapp.totalInvested)}}</div>
                     <sub>$ {{format(dapp.totalInvested*config.price.price,2)}}</sub>
                 </div>
                 <div class="inverted">
-                    <h2>total referral rewards</h2>
+                    <sub>TOTAL REFERRAL REWARDS</sub>
                     <div bnb>{{format(dapp.totalBonus)}}</div>
                     <sub>$ {{format(dapp.totalBonus*config.price.price,2)}}</sub>
                 </div>
@@ -74,13 +74,18 @@
                     <a href="https://docs.bnbroyal.io" target="_blank">docs</a>
                     <a href="https://t.me/bnbroyalofficial" target="_blank">telegram group</a>
                 </div>
+                <div class="whale">
+                    <h2>anti-whale algorithm</h2>
+                    <p>Users can only <u>claim</u> <b>every 24 hours</b> with a maximum amount of <b>20 BNB</b>.<br>Excess dividends are sent back to the user's account available for the next withdrawal.</p>
+                </div>
                 <div>
                     <h2>read before use</h2>
                     <p>The principal deposit cannot be withdrawn, the only return users can get are daily dividends and referral rewards.</p>
                 </div>
-                <div class="whale">
-                    <h2>anti-whale algorithm</h2>
-                    <p>Users can only <u>claim</u> <b>every 24 hours</b> with a maximum amount of <b>20 BNB</b>.<br>Excess dividends are sent back to the user's account available for the next withdrawal.</p>
+                <div class="">
+                    <sub>CONTRACT BALANCE</sub>
+                    <div bnb>{{format(dapp.balance)}}</div>
+                    <sub>$ {{format(dapp.balance*config.price.price,2)}}</sub>
                 </div>
     
                 <div class="footer">
@@ -90,6 +95,15 @@
             <div class="main">
                 <div class="account">
                     <h2>your account</h2>
+                    <!--sub>Wallet: {{cleanText(user.address)}}</sub-->
+                    <div>
+                        <div>
+                            <div>wallet balance:</div>
+                            <div bnb>{{format(user.balance, 4)}}</div>
+                            <sub>$ {{format(user.balance*config.price.price,2)}}</sub>
+                        </div>
+                    </div>
+                    <hr>
                     <div>
                         <div>
                             <div>bnb to claim</div>
@@ -107,7 +121,7 @@
                     </div>
                 </div>
                 <div>
-                    <h2>choose a plan</h2>
+                    <h2>stake bnb</h2>
                     <div class="planlist">
                         <div>
                             <input type="radio" name="planpick" id="plan1" value="0" v-model="val.plan" v-bind:checked="val.plan==0">
@@ -199,6 +213,7 @@
                             <div>2%</div>
                         </div>
                     </div>
+                    <hr>
                     <div class="refinfo">
                         <div>
                             <div>total rewards</div>
