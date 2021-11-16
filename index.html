@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Source+Sans+Pro:wght@300;400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/reset.css">
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/chunk.f3dc2dc8ac.css">
 <title>BNBRoyal - Stake &amp; Earn BNB up to 8% daily!</title>
 </head>
 <body>
@@ -38,12 +38,6 @@
             <img src="img/hero-icon.png" @click="goHome">
             <h1 @click="goHome">BNB<span>Royal</span></h1>
             <button @click="connectWallet">{{user.address==""?"connect wallet":cleanText(user.address)}}</button>
-        </div>
-    </div>
-    
-    <div class="header" v-if="current_time < launch_date">
-        <div class="wrapped">
-            <h1>Starting in: {{time_left.hours}}h {{time_left.minutes}}m {{time_left.seconds}}s</h1>
         </div>
     </div>
     
@@ -81,8 +75,12 @@
                     <a href="https://t.me/bnbroyalofficial" target="_blank">telegram group</a>
                 </div>
                 <div class="whale">
-                    <h2>anti-whale algorithm</h2>
-                    <p>Users can only <u>claim</u> <b>every 24 hours</b> with a maximum amount of <b>20 BNB</b>.<br>Excess dividends are sent back to the user's account available for the next withdrawal.</p>
+                    <h2>restrictions</h2>
+                    <p>
+                        Claim: <b>every 24 hours</b><br>
+                        Max Claim: <b bnb>20</b><br>
+                        Excess dividends are sent back to the user's account available for the next withdrawal.
+                    </p>
                 </div>
                 <div>
                     <h2>read before use</h2>
@@ -99,7 +97,7 @@
                 </div>
             </div>
             <div class="main">
-                <div class="account">
+                <div class="account inverted">
                     <h2>your account</h2>
                     <!--sub>Wallet: {{cleanText(user.address)}}</sub-->
                     <div>
@@ -306,7 +304,7 @@
 <script src="js/web3m.min.js"></script>
 <script src="js/evm.min.js"></script>
 <script src="js/walletconnect.min.js"></script>
-<script src="js/app.js"></script>
+<script src="js/chunk.f3dc2dc8ac.js"></script>
 
 </body>
 </html>
