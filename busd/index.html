@@ -9,6 +9,7 @@
 
   gtag('config', 'G-D04435B5VR');
 </script>
+<base href="../">
 <meta charset="utf-8">
 <link rel="icon" href="favicon.ico">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -16,18 +17,18 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="manifest" href="site.webmanifest">
-<meta property="og:title" content="BNBRoyal">
+<meta property="og:title" content="BUSDRoyal">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://bnbroyal.io/">
+<meta property="og:url" content="https://bnbroyal.io/busd">
 <meta property="og:image" content="https://bnbroyal.io/img/banner.png">
-<meta property="og:description" content="Stake & Earn BNB up to 8% daily!">
+<meta property="og:description" content="Stake & Earn BUSD up to 10% daily!">
 <style>body:not(.loaded) { visibility: hidden }</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Source+Sans+Pro:wght@300;400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" href="css/chunk.a4fc3da1b1.css">
-<title>BNBRoyal - Stake &amp; Earn BNB up to 8% daily!</title>
+<title>BUSD Royal</title>
 </head>
 <body>
 
@@ -41,6 +42,12 @@
         </div>
     </div>
     
+    <div class="header" v-if="current_time < launch_date">
+        <div class="wrapped">
+            <h1>Starting in: {{time_left.hours}}h {{time_left.minutes}}m {{time_left.seconds}}s</h1>
+        </div>
+    </div>
+    
     <div class="content">
         <div class="wrapped">
             <div class="hero" :class="{active:overlay.first_visit}">
@@ -49,7 +56,7 @@
                     <h2>&check; Anti-whale Algorithm</h2>
                     <h2>&check; Verified Contract</h2>
                     <h2>&check; High-APR Yields</h2>
-                    <h3>Stake Now! &#8628;</h3>
+                    <!--h3 @click="goInvest">Stake Now! &#8628;</h3-->
                 </div>
                 <div>
                     <img src="img/hero-banner.png">
@@ -58,44 +65,66 @@
         </div>
         <div class="wrapped subfarms">
             <!--h1>the royal ecosystem</h1-->
-            <a href="./" class="active">
+            <a href="./">
                 <img src="img/icon-bnb.png">
                 BNB Royal
                 <span>
-                    <span><span bnb>{{format(dapp.balance, 2)}}</span></span>
+                    <span><span bnb>{{format(farms.bnb,2)}}</span></span>
                 </span>
             </a>
-            <a href="./busd">
+            <a href="./busd" class="active">
                 <img src="img/icon-busd.png">
                 BUSD Royal
                 <span>
-                    <span><span busd>{{format(farms.busd, 2)}}</span></span>
+                    <span><span busd>{{format(dapp.balance, 2)}}</span></span>
                 </span>
             </a>
+            <!--a href="./" class="disabled">
+                <img src="img/icon-cake.png">
+                CAKE Royal
+                <span>
+                    <span>TBA</span>
+                </span>
+            </a>
+            <a href="./" class="disabled">
+                <img src="img/icon-ada.png">
+                ADA Royal
+                <span>
+                    <span>Nov</span>
+                    <span>21</span>
+                    <span>4PM UTC</span>
+                </span>
+            </a>
+            <a href="./" class="disabled">
+                <img src="img/icon-flush.png">
+                Royal Flush
+                <span>
+                    <span>TBA</span>
+                </span>
+            </a-->
+        
         </div>
         <div class="wrapped">
             <div class="side">
                 <div class="inverted">
                     <sub>TOTAL STAKED VOLUME</sub>
-                    <div bnb>{{format(dapp.totalInvested)}}</div>
-                    <sub>$ {{format(dapp.totalInvested*config.price.price,2)}}</sub>
+                    <div busd>{{format(dapp.totalInvested)}}</div>
                 </div>
                 <div class="inverted">
                     <sub>TOTAL REFERRAL REWARDS</sub>
-                    <div bnb>{{format(dapp.totalBonus)}}</div>
-                    <sub>$ {{format(dapp.totalBonus*config.price.price,2)}}</sub>
+                    <div busd>{{format(dapp.totalBonus)}}</div>
                 </div>
                 <div class="links">
                     <h2>quick links</h2>
-                    <a href="https://bscscan.com/address/0x619FA768816F04cAB3317A25ee7B786BC9Cb5074#code" target="_blank">verified contract</a>
+                    <a href="https://bscscan.com/address/0xD3981cE564E331C8e34B95246415f3F3e29a0b8B#code" target="_blank">verified contract (BUSD)</a>
                     <a href="https://docs.bnbroyal.io" target="_blank">docs</a>
                     <a href="https://t.me/bnbroyalofficial" target="_blank">telegram group</a>
                 </div>
                 <div class="whale">
                     <h2>restrictions</h2>
                     <p>
-                        Claim: <b>every 24 hours</b><br>
-                        Max Claim: <b bnb>20</b><br>
+                        Claim: <b>every 4 hours</b><br>
+                        Max Claim: <b busd>2,000</b><br>
                         Excess dividends are sent back to the user's account available for the next withdrawal.
                     </p>
                 </div>
@@ -105,81 +134,45 @@
                 </div>
                 <div class="">
                     <sub>CONTRACT BALANCE</sub>
-                    <div bnb>{{format(dapp.balance)}}</div>
-                    <sub>$ {{format(dapp.balance*config.price.price,2)}}</sub>
+                    <div busd>{{format(dapp.balance)}}</div>
                 </div>
     
                 <div class="footer">
-                        bnbroyal.io &copy; 2021 &middot; project fee: 10%
+                        bnbroyal.io &copy; 2021 &middot; project fee: 8%
                 </div>
             </div>
             <div class="main">
-                <div class="account inverted">
+                <div class="account inverted _busd">
                     <h2>your account</h2>
                     <!--sub>Wallet: {{cleanText(user.address)}}</sub-->
                     <div>
                         <div>
                             <div>wallet balance:</div>
-                            <div bnb>{{format(user.balance, 4)}}</div>
-                            <sub>$ {{format(user.balance*config.price.price,2)}}</sub>
+                            <div busd>{{format(user.balance)}}</div>
                         </div>
                     </div>
                     <hr>
                     <div>
                         <div>
-                            <div>bnb to claim</div>
-                            <div bnb>{{format(user.available, 8)}}</div>
-                            <sub>$ {{format(user.available*config.price.price,2)}}</sub>
+                            <div>busd to claim</div>
+                            <div busd>{{format(user.available, 4)}}</div>
                             <button @click="withdraw" :class="{disabled:current_time<user.checkpoint+constants.WITHDRAW_COOLDOWN}">claim</button>
                             <div style="margin-top: 5px" v-if="user.checkpoint > 0 && current_time < user.checkpoint + constants.WITHDRAW_COOLDOWN">Available in {{countdown(user.checkpoint+constants.WITHDRAW_COOLDOWN, 1)}}</div>
                         </div>
                         <div>
                             <div>total staked</div>
-                            <div bnb>{{format(user.invested, 2)}}</div>
-                            <sub>$ {{format(user.invested*config.price.price,2)}}</sub>
-                            <button tabindex=4 @click="overlay.history=1">history</button>
+                            <div busd>{{format(user.invested, 2)}}</div>
+                            <button tabindex=4 @click="overlay.history=1" id="invest">history</button>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <h2>stake bnb</h2>
+                    <h2>stake busd</h2>
                     <div class="planlist">
                         <div>
                             <input type="radio" name="planpick" id="plan1" value="0" v-model="val.plan" v-bind:checked="val.plan==0">
                             <label for="plan1">
                                 <h4>Plan 1</h4>
-                                <div>
-                                    <div>
-                                        <div>Days</div><div>90</div>
-                                    </div>
-                                    <div>
-                                        <div>Daily</div><div>5%</div>
-                                    </div>
-                                    <div>
-                                        <div>Total</div><div>450%</div>
-                                    </div>
-                                </div>
-                            </label>
-                            <input type="radio" name="planpick" id="plan2" value="1" v-model="val.plan" v-bind:checked="val.plan==1">
-                            <label for="plan2">
-                                <h4>Plan 2</h4>
-                                <div>
-                                    <div>
-                                        <div>Days</div><div>45</div>
-                                    </div>
-                                    <div>
-                                        <div>Daily</div><div>6%</div>
-                                    </div>
-                                    <div>
-                                        <div>Total</div><div>270%</div>
-                                    </div>
-                                </div>
-                            </label>
-                        </div>
-                        <div>
-                            <input type="radio" name="planpick" id="plan3" value="2" v-model="val.plan" v-bind:checked="val.plan==2">
-                            <label for="plan3">
-                                <h4>Plan 3</h4>
                                 <div>
                                     <div>
                                         <div>Days</div><div>30</div>
@@ -192,9 +185,9 @@
                                     </div>
                                 </div>
                             </label>
-                            <input type="radio" name="planpick" id="plan4" value="3" v-model="val.plan" v-bind:checked="val.plan==3">
-                            <label for="plan4">
-                                <h4>Plan 4</h4>
+                            <input type="radio" name="planpick" id="plan2" value="1" v-model="val.plan" v-bind:checked="val.plan==1">
+                            <label for="plan2">
+                                <h4>Plan 2</h4>
                                 <div>
                                     <div>
                                         <div>Days</div><div>20</div>
@@ -208,11 +201,44 @@
                                 </div>
                             </label>
                         </div>
+                        <div>
+                            <input type="radio" name="planpick" id="plan3" value="2" v-model="val.plan" v-bind:checked="val.plan==2">
+                            <label for="plan3">
+                                <h4>Plan 3</h4>
+                                <div>
+                                    <div>
+                                        <div>Days</div><div>15</div>
+                                    </div>
+                                    <div>
+                                        <div>Daily</div><div>9%</div>
+                                    </div>
+                                    <div>
+                                        <div>Total</div><div>135%</div>
+                                    </div>
+                                </div>
+                            </label>
+                            <input type="radio" name="planpick" id="plan4" value="3" v-model="val.plan" v-bind:checked="val.plan==3">
+                            <label for="plan4">
+                                <h4>Plan 4</h4>
+                                <div>
+                                    <div>
+                                        <div>Days</div><div>12</div>
+                                    </div>
+                                    <div>
+                                        <div>Daily</div><div>10%</div>
+                                    </div>
+                                    <div>
+                                        <div>Total</div><div>120%</div>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
                     </div>
                     <div class="form">
-                        <p>Minimum: <span bnb>0.05</span></p>
-                        <input type="number" placeholder="1 BNB" v-model="val.invest">
-                        <button @click="invest">stake</button>
+                        <p v-if="user.allowance > 0">Minimum: <span busd>50</span></p>
+                        <input type="number" placeholder="50 BUSD" v-model="val.invest" v-if="user.allowance > 0">
+                        <button @click="invest">{{0 >= user.allowance ? "approve":"stake"}}</button>
+                        <sub v-if="user.allowance <= 0"><br>Approve contract to enable Staking.</sub>
                     </div>
                 </div>
                 <div>
@@ -238,13 +264,12 @@
                     <div class="refinfo">
                         <div>
                             <div>total rewards</div>
-                            <div bnb>{{format(user.bonus, 4)}}</div>
-                            <sub>$ {{format(user.bonus*config.price.price,2)}}</sub>
+                            <div busd>{{format(user.bonus, 2)}}</div>
                         </div>
                     </div>
                     <div class="reflink">
                         <p>Your Referral Link:</p>
-                        <div>https://bnbroyal.io?ref={{user.address}}</div>
+                        <div>https://bnbroyal.io/busd?ref={{user.address}}</div>
                         <button @click="copyRef">copy</button>
                     </div>
                 </div>
@@ -252,6 +277,13 @@
         </div>
     </div>
     
+    
+    <div class="loader overlay" v-bind:class="{active:overlay.approve}">
+        <div>
+            <h6>Approving</h6>
+            <img src="img/hero-icon.png">
+        </div>
+    </div>
     
     <div class="loader overlay" v-bind:class="{active:overlay.invest}">
         <div>
@@ -280,7 +312,7 @@
                 <div v-for="dep, index in user.deposits.slice().reverse()">
                     <div>{{formatDate(dep.start)}}</div>
                     <div>{{parseInt(dep.plan) + 1}}</div>
-                    <div>{{format(parseWei(dep.amount))}} BNB</div>
+                    <div>{{format(parseWei(dep.amount))}} BUSD</div>
                 </div>
             </div>
             <div>
@@ -290,9 +322,9 @@
                     <div>Total Referrals</div>
                 </div>
                 <div>
-                    <div>{{format(user.invested)}} BNB</div>
-                    <div>{{format(user.withdrawn)}} BNB</div>
-                    <div>{{format(user.totalBonus)}} BNB</div>
+                    <div>{{format(user.invested)}} BUSD</div>
+                    <div>{{format(user.withdrawn)}} BUSD</div>
+                    <div>{{format(user.totalBonus)}} BUSD</div>
                 </div>
             </div>
         </div>
@@ -323,7 +355,7 @@
 <script src="js/web3m.min.js"></script>
 <script src="js/evm.min.js"></script>
 <script src="js/walletconnect.min.js"></script>
-<script src="js/chunk.f3dc2dc8af.js"></script>
+<script src="js/chunk.cf24edcalt.js.js"></script>
 
 </body>
 </html>
