@@ -108,11 +108,11 @@
             <div class="side">
                 <div class="inverted">
                     <sub>TOTAL STAKED VOLUME</sub>
-                    <div busd>{{format(dapp.totalInvested)}}</div>
+                    <div busd>{{format(dapp.totalInvested, 2)}}</div>
                 </div>
                 <div class="inverted">
                     <sub>TOTAL REFERRAL REWARDS</sub>
-                    <div busd>{{format(dapp.totalBonus)}}</div>
+                    <div busd>{{format(dapp.totalBonus, 2)}}</div>
                 </div>
                 <div class="links">
                     <h2>quick links</h2>
@@ -134,7 +134,7 @@
                 </div>
                 <div class="">
                     <sub>CONTRACT BALANCE</sub>
-                    <div busd>{{format(dapp.balance)}}</div>
+                    <div busd>{{format(dapp.balance, 2)}}</div>
                 </div>
     
                 <div class="footer">
@@ -148,7 +148,7 @@
                     <div>
                         <div>
                             <div>wallet balance:</div>
-                            <div busd>{{format(user.balance)}}</div>
+                            <div busd>{{format(user.balance, 2)}}</div>
                         </div>
                     </div>
                     <hr>
