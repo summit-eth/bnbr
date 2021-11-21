@@ -1,0 +1,18 @@
+
+
+:root {
+    --royal-orange: #34c6d1 !important;
+}
+
+button {
+    background: linear-gradient(200deg, #4ed7dd, #24c7d6) !important;
+    color: var(--royal-dark) !important;
+}
+
+.header img {
+    filter: hue-rotate(152deg);
+}
+
+[busd]::after, [bnb]::after {
+    color: #f9a11f !important;
+}

@@ -1,4 +1,4 @@
-'use strict'; var abi_contract_alt = [
+'use strict'; var abi_contract_cake = [
 	{
 		"constant": true,
 		"inputs": [],
