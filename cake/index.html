@@ -124,6 +124,9 @@
                     <sub>CONTRACT BALANCE</sub>
                     <div cake>{{format(dapp.balance, 2)}}</div>
                     <sub>$ {{format(dapp.balance*config.price.price_pcs,2)}}</sub>
+                    <hr>
+                    <sub>LAUNCH DATE</sub>
+                    <div>{{formatDate(_launch_date)}}</div>
                 </div>
     
                 <div class="footer">
@@ -334,7 +337,7 @@
 var _farm = "cake";
 var _min_invest = 2;
 var _withdraw_cooldown = 4 * 60 * 60000;
-var _launch_date = 1637164800000; /* 11 21 2021 Stealth Launch */
+var _launch_date = 1637482650000; /* 11 21 2021 Stealth Launch */
 </script>
 <script src="js/app.js?v=11212021_final"></script>
 
