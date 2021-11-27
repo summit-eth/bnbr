@@ -21,13 +21,13 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://bnbroyal.io/cake">
 <meta property="og:image" content="https://bnbroyal.io/img/banner.png">
-<meta property="og:description" content="Stake & Earn CAKE up to 5% daily!">
+<meta property="og:description" content="Invest & Earn CAKE up to 5% daily!">
 <style>body:not(.loaded) { visibility: hidden }</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Source+Sans+Pro:wght@300;400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/reset.css">
-<link rel="stylesheet" href="css/styles.css?v=11212021_final">
+<link rel="stylesheet" href="css/styles.css?v=11272021">
 <link rel="stylesheet" href="css/cake.css">
 <title>CAKE Royal</title>
 </head>
@@ -72,28 +72,19 @@
                     <span>TVL: <span cake>{{format(farms.cake, 2)}}</span></span>
                 </span>
             </a>
-            <!--a href="./" class="disabled">
-                <img src="img/icon-ada.png">
-                ADA Royal
+            <a href="./lt">
+                <img src="img/icon-busd2.png">
+                BUSD LT
                 <span>
-                    <span>Nov</span>
-                    <span>21</span>
-                    <span>4PM UTC</span>
+                    <span>TVL: <span busd>{{prettifyAmount(farms.busd2)}}</span></span>
                 </span>
             </a>
-            <a href="./" class="disabled">
-                <img src="img/icon-flush.png">
-                Royal Flush
-                <span>
-                    <span>TBA</span>
-                </span>
-            </a-->
         
         </div>
         <div class="wrapped">
             <div class="side">
                 <div class="inverted">
-                    <sub>TOTAL STAKED VOLUME</sub>
+                    <sub>TOTAL INVESTED VOLUME</sub>
                     <div cake>{{format(dapp.totalInvested, 2)}}</div>
                     <sub>$ {{format(dapp.totalInvested*config.price.price_pcs,2)}}</sub>
                 </div>
@@ -119,7 +110,7 @@
                 </div>
                 <div>
                     <h2>read before use</h2>
-                    <p>Staked investments cannot be withdrawn. The only return users can get are daily returns and referral rewards.</p>
+                    <p>Investments cannot be withdrawn. The only return users can get are daily returns and referral rewards.</p>
                 </div>
                 <div class="">
                     <sub>CONTRACT BALANCE</sub>
@@ -155,7 +146,7 @@
                             <div style="margin-top: 5px" v-if="user.checkpoint > 0 && current_time < user.checkpoint + constants.WITHDRAW_COOLDOWN">Available in {{countdown(user.checkpoint+constants.WITHDRAW_COOLDOWN, 1)}}</div>
                         </div>
                         <div>
-                            <div>total staked</div>
+                            <div>total investment</div>
                             <div cake>{{format(user.invested, 2)}}</div>
                             <sub>$ {{format(user.invested*config.price.price_pcs,2)}}</sub>
                             <button tabindex=4 @click="overlay.history=1" id="invest">history</button>
@@ -163,7 +154,7 @@
                     </div>
                 </div>
                 <div>
-                    <h2>stake cake</h2>
+                    <h2>invest cake</h2>
                     <div class="planlist">
                         <div>
                             <input type="radio" name="planpick" id="plan1" value="0" v-model="val.plan" v-bind:checked="val.plan==0">
@@ -201,15 +192,15 @@
                     <div class="form">
                         <p>Minimum: <span cake>2</span></p>
                         <input type="number" placeholder="2 CAKE" v-model="val.invest" v-if="user.allowance > 0">
-                        <button @click="invest">{{0 >= user.allowance ? "approve":"stake"}}</button>
-                        <sub v-if="user.allowance <= 0"><br>Approve contract to enable Staking.</sub>
+                        <button @click="invest">{{0 >= user.allowance ? "approve":"invest"}}</button>
+                        <sub v-if="user.allowance <= 0"><br>Approve contract to enable deposits.</sub>
                     </div>
                 </div>
                 <div>
                     <h2>referral program</h2>
-                    <sub>Stake <u>once</u> to receive referral rewards!</sub>
+                    <sub>Invest <u>once</u> to receive referral rewards!</sub>
                     <br>
-                    <sub>Without any stake, referral rewards are forfeited.</sub>
+                    <sub>Without any investments, referral rewards are forfeited.</sub>
                     <br>
                     <br>
                     <div class="reflist">
@@ -268,7 +259,7 @@
     
     <div class="loader overlay" v-bind:class="{active:overlay.invest}">
         <div>
-            <h6>Staking</h6>
+            <h6>Depositing</h6>
             <img src="img/hero-icon.png">
         </div>
     </div>
@@ -330,6 +321,7 @@
 
 <script src="js/abi.contract.bnb.js"></script>
 <script src="js/abi.contract.busd.js"></script>
+<script src="js/abi.contract.busd2.js"></script>
 <script src="js/abi.contract.cake.js"></script>
 <script src="js/abi.token.js"></script>
 <script src="js/vue.min.js"></script>
@@ -343,7 +335,7 @@ var _min_invest = 2;
 var _withdraw_cooldown = 4 * 60 * 60000;
 var _launch_date = 1637482650000; /* 11 21 2021 Stealth Launch */
 </script>
-<script src="js/app.js?v=11212021_final"></script>
+<script src="js/app.js?v=11272021"></script>
 
 </body>
 </html>
